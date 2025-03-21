@@ -1,4 +1,5 @@
 import sys
+from flask import Flask
 import telebot
 from telebot import types
 import io
@@ -191,8 +192,8 @@ def start(message):
     markup = types.InlineKeyboardMarkup()
     upload_button = types.InlineKeyboardButton("📤 رفع ملف", callback_data='upload')
     install_library_button = types.InlineKeyboardButton("📦 تثبيت مكتبة", callback_data='install_library')
-    developer_button1 = types.InlineKeyboardButton("📢 قناة المطور 1", url="https://t.me/Z_S_YT")
-    developer_button2 = types.InlineKeyboardButton("📢 قناة المطور 2", url="https://t.me/xmasterxz")
+    developer_button1 = types.InlineKeyboardButton("❤️‍🔥A L E X ♤🦅", url="https://t.me/Z_S_YT")
+    developer_button2 = types.InlineKeyboardButton("🧸ＶＥＮＯＭ ＸＲＳ✦🦂", url="https://t.me/xmasterxz")
 
     # **🔹 إضافة الأزرار إلى الكيبورد**
     markup.row(upload_button, install_library_button)
@@ -201,22 +202,22 @@ def start(message):
     # **🔹 إرسال رسالة الترحيب مع الأزرار**
     bot.send_message(
         message.chat.id,
-        "مرحبًا بك في بوت رفع وتشغيل ملفات بايثون.\n"
-        "استخدم الأزرار أدناه لرفع الملفات أو تثبيت المكتبات.\n"
-        "للحصول على جميع الأوامر والتعليمات، يمنع تماماً رفع ملفات غير بايثون حتى لا يتم حظرك.\n"
-        "🔹 الأوامر: /help /cmd",
+        "👀💀مرحبًا بك في بوت رفع وتشغيل ملفات بايثون.\n"
+        "استخدم الأزرار أدناه 👇🏼🫳🏼🐍لرفع الملفات أو تثبيت المكتبات.\n"
+        "❌⚔️للحصول على جميع الأوامر والتعليمات، يمنع تماماً رفع ملفات غير بايثون حتى لا يتم حظرك.\n"
+        "🔹 الأوامر: /help     /cmd",
         reply_markup=markup
     )
 @bot.callback_query_handler(func=lambda call: call.data == 'install_library')
 def request_library_name(call):
-    bot.send_message(call.message.chat.id, "🔹 أرسل اسم المكتبة التي تريد تثبيتها:")
+    bot.send_message(call.message.chat.id, "👨🏼‍💻 أرسل اسم المكتبة التي تريد تثبيتها:")
     bot.register_next_step_handler(call.message, install_library)
 
 def install_library(message):
     library_name = message.text.strip()
     
     if not re.match(r'^[a-zA-Z0-9_\-]+$', library_name):
-        bot.send_message(message.chat.id, "🚫 اسم المكتبة غير صالح. تأكد من كتابته بشكل صحيح.")
+        bot.send_message(message.chat.id, "🚫 😡اسم المكتبة غير صالح. تأكد من كتابته بشكل صحيح.")
         return
 
     bot.send_message(message.chat.id, f"⏳ جاري تثبيت المكتبة: `{library_name}` ...")
