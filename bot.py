@@ -1247,14 +1247,7 @@ def stop_bot_server():
     bot.stop_polling()
     for chat_id, script_info in bot_scripts.items():
         stop_bot(script_info['path'], chat_id)
-
-def start_bot_server():
-    try:
-        bot.polling(none_stop=True)  # تأكد من تشغيل البوت بشكل مستمر
-    except Exception as e:
-        logging.error(f"Error: {e}")
-        time.sleep(5)  # انتظار 5 ثوانٍ قبل إعادة المحاولة
-
+        # تأكد من تشغيل البوبشمممساممسمممسامممس
 def handle_broadcast_message(message):
     if str(message.from_user.id) != ADMIN_ID:
         bot.reply_to(message, "ليس لديك صلاحية استخدام هذا الأمر.")
@@ -1310,14 +1303,25 @@ def start_all_files(chat_id):
         bot.send_message(chat_id, "لا توجد ملفات متوقفة لتشغيلها.")
 
 
-#########################
+########################
 
+# تعريف # تشغيل Flask لإنشاء Health Check
+# تشغيل Flask لإنشاء Health Check
+app = Flask(__name__)
 
-# ضمان تشغيل نسخة واحدة فقط من البوت مع إعادة التشغيل التلقائية في حال حدوث خطأ
+@app.route('/health')
+def health_check():
+    return "OK", 200
+
+def run_flask():
+    app.run(host="0.0.0.0", port=5000)  # تشغيل على المنفذ الصحيح
+
+# تشغيل البوت وضمان إعادة تشغيله في حال حدوث خطأ
 if __name__ == "__main__":
+    threading.Thread(target=run_flask, daemon=True).start()  # تشغيل Flask في Thread منفصل
     while True:
         try:
-            bot.infinity_polling()
+            bot.infinity_polling()  # تشغيل البوت بشكل مستمر
         except Exception as e:
             logging.error(f"Error: {e}")
-            time.sleep(5)  # انتظار 5 ثواني قبل إعادة المحاولة
+            time.sleep(5)  # انتظار 5 ثوانٍ قبل إعادة التشغيلالمحاولة
