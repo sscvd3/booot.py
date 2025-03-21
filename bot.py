@@ -1313,9 +1313,10 @@ app = Flask(__name__)
 @app.route('/health')
 def health_check():
     return "OK", 200
-
+    
 def run_flask():
-    app.run(host="0.0.0.0", port=5000)  # تشغيل على المنفذ الصحيح
+    PORT = int(os.environ.get("PORT", 8000))  # استخدام المتغير PORT أو 8000 كافتراضي
+    app.run(host="0.0.0.0", port=PORT, threaded=True)   # تفعيل threaded طن# تشغيل على المنفذ الصحيح
 
 # تشغيل البوت وضمان إعادة تشغيله في حال حدوث خطأ
 if __name__ == "__main__":
@@ -1325,4 +1326,4 @@ if __name__ == "__main__":
             bot.infinity_polling()  # تشغيل البوت بشكل مستمر
         except Exception as e:
             logging.error(f"Error: {e}")
-            time.sleep(5)  # انتظار 5 ثوانٍ قبل إعادة التشغيلالمحاولة
+            time.sleep(3)  # انتظار 5 ثوانٍ قبل إعادة التشغيلالمحاولة
