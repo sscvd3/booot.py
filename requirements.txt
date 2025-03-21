@@ -1,4 +1,4 @@
-Supervisor
+
 pyTelegramBotAPI
 gunicorn
 requests
